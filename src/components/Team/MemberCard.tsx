@@ -6,7 +6,7 @@ import { Mail, Activity, Clock, Edit3 } from "lucide-react";
 import SkillRadarChart from './SkillRadarChart';
 import { Progress } from "@/components/ui/progress";
 
-const roleColors = {
+const roleColors: { [key: string]: string } = {
   "Marketing Manager": "bg-purple-500/20 text-purple-300 border-purple-500/40",
   "Content Creator": "bg-blue-500/20 text-blue-300 border-blue-500/40",
   "Social Media Specialist": "bg-pink-500/20 text-pink-300 border-pink-500/40",
@@ -17,8 +17,8 @@ const roleColors = {
   "Data Analyst": "bg-cyan-500/20 text-cyan-300 border-cyan-500/40",
 };
 
-export default function MemberCard({ member, onEdit }) {
-  const getWorkloadColor = (workload) => {
+export default function MemberCard({ member, onEdit }: { member: any; onEdit: () => void }) {
+  const getWorkloadColor = (workload: number) => {
     if (workload >= 80) return "text-red-300";
     if (workload >= 60) return "text-yellow-300";
     return "text-green-300";
@@ -71,11 +71,17 @@ export default function MemberCard({ member, onEdit }) {
               <span className="text-xs text-slate-400 uppercase tracking-wide">Workload</span>
             </div>
              <div className="flex items-center gap-2">
-                <Progress 
-                  value={member.current_workload || 0} 
+                <Progress
+                  value={member.current_workload || 0}
                   className="h-1.5 flex-1"
-                  indicatorClassName={
-                    (member.current_workload || 0) >= 80 ? 'bg-red-400' : 
-                    (member.current_workload || 0) >= 60 ? 'bg-yellow-400' : 'bg-green-400'
-                  }
- 
+                />
+                <span className={`text-sm font-medium ${getWorkloadColor(member.current_workload || 0)}`}>
+                  {member.current_workload || 0}%
+                </span>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+  );
+}

@@ -25,7 +25,7 @@ import {
   ResponsiveContainer
 } from 'recharts';
 
-export default function KeywordTracker({ domain }) {
+export default function KeywordTracker({ domain }: { domain?: string }) {
   const [newKeyword, setNewKeyword] = useState('');
   const [selectedKeyword, setSelectedKeyword] = useState(null);
   const queryClient = useQueryClient();
