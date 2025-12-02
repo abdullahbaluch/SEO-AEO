@@ -278,20 +278,20 @@ export const GraphEngine = {
   // Get node colors based on type/severity
   getNodeColor: (node) => {
     const colors = {
-      page: '#6366f1',
-      score: node.data?.severity === 'good' ? '#10b981' : 
+      page: '#1f2937',
+      score: node.data?.severity === 'good' ? '#10b981' :
              node.data?.severity === 'warning' ? '#f59e0b' : '#ef4444',
-      issue: node.group === 'critical' ? '#ef4444' : 
-             node.group === 'warning' ? '#f59e0b' : 
+      issue: node.group === 'critical' ? '#ef4444' :
+             node.group === 'warning' ? '#f59e0b' :
              node.group === 'info' ? '#3b82f6' : '#10b981',
-      heading: '#8b5cf6',
-      heading_group: '#7c3aed',
-      schema: '#06b6d4',
-      keyword: '#ec4899',
-      keyword_group: '#db2777',
-      link_group: '#14b8a6',
+      heading: '#4b5563',
+      heading_group: '#374151',
+      schema: '#6b7280',
+      keyword: '#4b5563',
+      keyword_group: '#374151',
+      link_group: '#6b7280',
       internal_link: '#10b981',
-      external_link: '#f97316',
+      external_link: '#f59e0b',
     };
     return colors[node.type] || '#94a3b8';
   },
