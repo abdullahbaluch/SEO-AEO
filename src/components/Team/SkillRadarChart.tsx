@@ -1,7 +1,7 @@
 import React from 'react';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer, Legend, Tooltip } from 'recharts';
 
-export default function SkillRadarChart({ skills, memberName }) {
+export default function SkillRadarChart({ skills, memberName }: { skills: any; memberName: string }) {
   const skillData = [
     {
       subject: 'Content',

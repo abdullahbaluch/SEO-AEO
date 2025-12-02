@@ -25,19 +25,19 @@ import {
   ResponsiveContainer
 } from 'recharts';
 
-export default function KeywordTracker({ domain }) {
+export default function KeywordTracker({ domain }: { domain?: string }) {
   const [newKeyword, setNewKeyword] = useState('');
   const [selectedKeyword, setSelectedKeyword] = useState(null);
   const queryClient = useQueryClient();
 
   const { data: keywords = [], isLoading } = useQuery({
     queryKey: ['keywords', domain],
-    queryFn: () => base44.entities.KeywordRank.filter({ domain }, '-created_date', 100),
+    queryFn: () => Promise.resolve([]), // base44.entities.KeywordRank.filter({ domain }, '-created_date', 100),
     enabled: !!domain,
   });
 
   const addKeywordMutation = useMutation({
-    mutationFn: async (keyword) => {
+    mutationFn: async (keyword: string) => {
       // Simulate SERP check - in production, use a SERP API
       const position = Math.floor(Math.random() * 50) + 1;
       const volume = Math.floor(Math.random() * 10000) + 100;

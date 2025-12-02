@@ -36,7 +36,7 @@ import {
 
 const COLORS = ['#6366f1', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899'];
 
-export default function CompetitorAnalysis({ domain }) {
+export default function CompetitorAnalysis({ domain }: { domain?: string }) {
   const [newCompetitor, setNewCompetitor] = useState('');
   const [selectedCompetitor, setSelectedCompetitor] = useState(null);
   const queryClient = useQueryClient();
