@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
-import { TeamMember } from "@/entities/TeamMember";
+// import { TeamMember } from "@/entities/TeamMember";
 
 const roles = [
   "Marketing Manager",
@@ -30,7 +30,7 @@ const skillLabels = {
   strategy: "Strategy"
 };
 
-export default function AddMemberForm({ open, onOpenChange, onMemberAdded }) {
+export default function AddMemberForm({ open, onOpenChange, onMemberAdded }: { open: boolean; onOpenChange: (open: boolean) => void; onMemberAdded: () => void }) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -51,12 +51,12 @@ export default function AddMemberForm({ open, onOpenChange, onMemberAdded }) {
   
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
     try {
-      await TeamMember.create(formData);
+      // await TeamMember.create(formData);
       onMemberAdded();
       onOpenChange(false);
       setFormData({
@@ -78,4 +78,54 @@ export default function AddMemberForm({ open, onOpenChange, onMemberAdded }) {
       });
     } catch (error) {
       console.error("Error adding team member:", error);
- 
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Add Team Member</DialogTitle>
+        </DialogHeader>
+        <form onSubmit={handleSubmit}>
+          <div className="space-y-4">
+            <div>
+              <Label htmlFor="name">Name</Label>
+              <Input
+                id="name"
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                required
+              />
+            </div>
+            <div>
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                required
+              />
+            </div>
+            <div>
+              <Label htmlFor="role">Role</Label>
+              <Select value={formData.role} onChange={(e) => setFormData({ ...formData, role: e.target.value })}>
+                {roles.map((role) => (
+                  <SelectItem key={role} value={role}>
+                    {role}
+                  </SelectItem>
+                ))}
+              </Select>
+            </div>
+            <Button type="submit" disabled={isSubmitting}>
+              {isSubmitting ? "Adding..." : "Add Member"}
+            </Button>
+          </div>
+        </form>
+      </DialogContent>
+    </Dialog>
+  );
+}

@@ -22,4 +22,17 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
 );
 Select.displayName = 'Select';
 
-export { Select };
+// Compound components for compatibility
+const SelectTrigger = Select;
+const SelectValue = ({ children, ...props }: any) => <>{children}</>;
+const SelectContent = ({ children, ...props }: any) => <>{children}</>;
+const SelectItem = React.forwardRef<HTMLOptionElement, React.OptionHTMLAttributes<HTMLOptionElement>>(
+  ({ className, children, ...props }, ref) => (
+    <option ref={ref} {...props}>
+      {children}
+    </option>
+  )
+);
+SelectItem.displayName = 'SelectItem';
+
+export { Select, SelectTrigger, SelectValue, SelectContent, SelectItem };

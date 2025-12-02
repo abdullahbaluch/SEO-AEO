@@ -157,8 +157,8 @@ function compileIssues(results: any): any[] {
   }
 
   // Sort by severity
-  const severityOrder = { critical: 0, warning: 1, info: 2 };
-  issues.sort((a, b) => severityOrder[a.severity] - severityOrder[b.severity]);
+  const severityOrder: { [key: string]: number } = { critical: 0, warning: 1, info: 2 };
+  issues.sort((a, b) => (severityOrder[a.severity] || 3) - (severityOrder[b.severity] || 3));
 
   return issues;
 }
