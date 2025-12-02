@@ -91,8 +91,8 @@ export default function LinkMapperPage() {
                   Max Pages: {maxPages}
                 </label>
                 <Slider
-                  value={[maxPages]}
-                  onValueChange={(v) => setMaxPages(v[0])}
+                  value={maxPages}
+                  onValueChange={(v) => setMaxPages(v)}
                   min={5}
                   max={50}
                   step={5}
@@ -104,8 +104,8 @@ export default function LinkMapperPage() {
                   Max Depth: {maxDepth}
                 </label>
                 <Slider
-                  value={[maxDepth]}
-                  onValueChange={(v) => setMaxDepth(v[0])}
+                  value={maxDepth}
+                  onValueChange={(v) => setMaxDepth(v)}
                   min={1}
                   max={4}
                   step={1}
