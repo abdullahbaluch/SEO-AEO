@@ -17,7 +17,7 @@ import {
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-export default function ContentOptimizer() {
+export default function ContentOptimizer({ domain }: { domain?: string }) {
   const [content, setContent] = useState('');
   const [targetKeyword, setTargetKeyword] = useState('');
   const [analysis, setAnalysis] = useState(null);

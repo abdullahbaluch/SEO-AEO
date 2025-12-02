@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -17,14 +19,14 @@ import {
 import KeywordTracker from '@/components/marketing/KeywordTracker';
 import BacklinkMonitor from '@/components/marketing/BacklinkMonitor';
 import ContentOptimizer from '@/components/marketing/ContentOptimizer';
-import CompetitorAnalysis from '@/components/marketing/CompetitorAnalysis';
+import CompetitorAnalysis from '@/components/marketing/CompetitirAnalysis';
 
 export default function Marketing() {
   const [domain, setDomain] = useState('');
   const [activeDomain, setActiveDomain] = useState('');
   const [activeTab, setActiveTab] = useState('keywords');
 
-  const handleSetDomain = (e) => {
+  const handleSetDomain = (e: React.FormEvent) => {
     e.preventDefault();
     if (domain.trim()) {
       // Clean domain
@@ -125,4 +127,51 @@ export default function Marketing() {
             {!activeDomain ? (
               <div className="bg-white rounded-2xl border border-gray-100 p-12 text-center">
                 <Target className="w-12 h-12 text-gray-300 mx-auto mb-3" />
- 
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Set Your Domain</h3>
+                <p className="text-gray-600">Enter your domain above to start tracking keywords</p>
+              </div>
+            ) : (
+              <KeywordTracker domain={activeDomain} />
+            )}
+          </TabsContent>
+
+          <TabsContent value="backlinks">
+            {!activeDomain ? (
+              <div className="bg-white rounded-2xl border border-gray-100 p-12 text-center">
+                <Link2 className="w-12 h-12 text-gray-300 mx-auto mb-3" />
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Set Your Domain</h3>
+                <p className="text-gray-600">Enter your domain above to monitor backlinks</p>
+              </div>
+            ) : (
+              <BacklinkMonitor domain={activeDomain} />
+            )}
+          </TabsContent>
+
+          <TabsContent value="content">
+            {!activeDomain ? (
+              <div className="bg-white rounded-2xl border border-gray-100 p-12 text-center">
+                <FileText className="w-12 h-12 text-gray-300 mx-auto mb-3" />
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Set Your Domain</h3>
+                <p className="text-gray-600">Enter your domain above to optimize content</p>
+              </div>
+            ) : (
+              <ContentOptimizer domain={activeDomain} />
+            )}
+          </TabsContent>
+
+          <TabsContent value="competitors">
+            {!activeDomain ? (
+              <div className="bg-white rounded-2xl border border-gray-100 p-12 text-center">
+                <Users className="w-12 h-12 text-gray-300 mx-auto mb-3" />
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Set Your Domain</h3>
+                <p className="text-gray-600">Enter your domain above to analyze competitors</p>
+              </div>
+            ) : (
+              <CompetitorAnalysis domain={activeDomain} />
+            )}
+          </TabsContent>
+        </Tabs>
+      </div>
+    </div>
+  );
+}
