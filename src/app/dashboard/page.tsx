@@ -286,7 +286,7 @@ export default function Dashboard() {
                         {currentScan.issues?.length || 0}
                       </div>
                       <div className="text-xs text-gray-500 mt-1">
-                        {currentScan.issues?.filter(i => i.severity === 'critical').length || 0} critical
+                        {currentScan.issues?.filter((i: any) => i.severity === 'critical').length || 0} critical
                       </div>
                     </div>
                     <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
