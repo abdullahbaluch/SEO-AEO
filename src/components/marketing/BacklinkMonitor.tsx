@@ -28,7 +28,7 @@ import {
   Tooltip
 } from 'recharts';
 
-export default function BacklinkMonitor({ domain }) {
+export default function BacklinkMonitor({ domain }: { domain?: string }) {
   const [filter, setFilter] = useState('all');
   const [newBacklink, setNewBacklink] = useState({ source_url: '', anchor_text: '' });
   const [showAddForm, setShowAddForm] = useState(false);
@@ -41,7 +41,7 @@ export default function BacklinkMonitor({ domain }) {
   });
 
   const addBacklinkMutation = useMutation({
-    mutationFn: async (data) => {
+    mutationFn: async (data: any) => {
       const sourceDomain = new URL(data.source_url).hostname;
       return base44.entities.Backlink.create({
         domain,

@@ -44,8 +44,8 @@ export function ScoreRadarChart({ scores }) {
           <Radar
             name="Score"
             dataKey="score"
-            stroke="#6366f1"
-            fill="#6366f1"
+            stroke="#1f2937"
+            fill="#1f2937"
             fillOpacity={0.3}
           />
           <Tooltip
@@ -198,7 +198,7 @@ export function KeywordChart({ keywords }) {
               name === 'density' ? 'Density' : 'Count'
             ]}
           />
-          <Bar dataKey="count" fill="#6366f1" radius={[4, 4, 0, 0]} />
+          <Bar dataKey="count" fill="#1f2937" radius={[4, 4, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
     </div>
@@ -232,7 +232,7 @@ export function ScoreComparisonChart({ oldScores, newScores }) {
           />
           <Legend />
           <Bar dataKey="previous" fill="#94a3b8" name="Previous" radius={[4, 4, 0, 0]} />
-          <Bar dataKey="current" fill="#6366f1" name="Current" radius={[4, 4, 0, 0]} />
+          <Bar dataKey="current" fill="#1f2937" name="Current" radius={[4, 4, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
     </div>
