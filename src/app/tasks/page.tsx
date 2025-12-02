@@ -9,7 +9,7 @@ import { createPageUrl } from "@/lib/utils";
 
 export default function Tasks() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/30 p-8">
+    <div className="min-h-screen bg-gray-50 p-8">
       <div className="max-w-7xl mx-auto">
         {/* Back Button */}
         <div className="mb-8">
