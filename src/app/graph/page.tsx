@@ -33,7 +33,7 @@ export default function Graph() {
 
   useEffect(() => {
     if (scans.length > 0 && !selectedScanId) {
-      setSelectedScanId(scans[0].id);
+      setSelectedScanId(scans[0].id || null);
     }
   }, [scans, selectedScanId]);
 

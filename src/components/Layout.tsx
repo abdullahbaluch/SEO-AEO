@@ -90,7 +90,7 @@ export default function Layout({ children, currentPageName }: LayoutProps) {
                 return (
                   <Link
                     key={item.name}
-                    to={createPageUrl(item.page)}
+                    href={createPageUrl(item.page)}
                     onClick={() => setMobileMenuOpen(false)}
                     className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium ${
                       isActive

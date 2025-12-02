@@ -26,7 +26,7 @@ export default function Marketing() {
   const [activeDomain, setActiveDomain] = useState('');
   const [activeTab, setActiveTab] = useState('keywords');
 
-  const handleSetDomain = (e) => {
+  const handleSetDomain = (e: React.FormEvent) => {
     e.preventDefault();
     if (domain.trim()) {
       // Clean domain

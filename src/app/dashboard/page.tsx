@@ -98,8 +98,8 @@ export default function Dashboard() {
         performance_score: results.scores?.performance || 0,
         image_score: results.scores?.images || 0,
         issues_count: results.issues?.length || 0,
-        critical_count: results.issues?.filter(i => i.severity === 'critical').length || 0,
-        warnings_count: results.issues?.filter(i => i.severity === 'warning').length || 0,
+        critical_count: results.issues?.filter((i: any) => i.severity === 'critical').length || 0,
+        warnings_count: results.issues?.filter((i: any) => i.severity === 'warning').length || 0,
         scan_data: JSON.stringify(results),
         // @ts-ignore
         graph_data: JSON.stringify(results.graph || {}),
@@ -355,12 +355,12 @@ export default function Dashboard() {
                           </h3>
                           <div className="space-y-3">
                             {currentScan.issues
-                              .sort((a, b) => {
-                                const order = { critical: 0, warning: 1, info: 2, opportunity: 3 };
+                              .sort((a: any, b: any) => {
+                                const order: { [key: string]: number } = { critical: 0, warning: 1, info: 2, opportunity: 3 };
                                 return (order[a.severity] || 4) - (order[b.severity] || 4);
                               })
                               .slice(0, 10)
-                              .map((issue, index) => (
+                              .map((issue: any, index: number) => (
                                 <IssueCard key={index} issue={issue} />
                               ))}
                           </div>
