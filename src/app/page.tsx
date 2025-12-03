@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { base44 } from '@/lib/api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
@@ -49,6 +50,8 @@ export default function Dashboard() {
   const [isScanning, setIsScanning] = useState(false);
   const [activeTab, setActiveTab] = useState('overview');
   const queryClient = useQueryClient();
+  const searchParams = useSearchParams();
+  const [hasAutoScanned, setHasAutoScanned] = useState(false);
 
   // Fetch scan history
   const { data: scans = [], isLoading: loadingScans } = useQuery({
@@ -128,6 +131,17 @@ export default function Dashboard() {
       console.error('Error loading scan:', e);
     }
   };
+
+  // Auto-trigger scan from URL parameters
+  useEffect(() => {
+    const url = searchParams.get('url');
+    const analyze = searchParams.get('analyze');
+
+    if (url && analyze === 'full' && !hasAutoScanned && !isScanning) {
+      setHasAutoScanned(true);
+      handleScan({ url: decodeURIComponent(url) });
+    }
+  }, [searchParams, hasAutoScanned, isScanning]);
 
   // Export handlers
   const handleExportJSON = () => {
