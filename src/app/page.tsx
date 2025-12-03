@@ -26,7 +26,8 @@ import {
   Shield,
   Key,
   Sparkles,
-  Globe
+  Globe,
+  TrendingUp
 } from 'lucide-react';
 
 import ScanForm from '@/components/seo/ScanForm';
@@ -253,6 +254,83 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
+
+        {/* Quick Access Tools */}
+        {!currentScan && !isScanning && (
+          <div className="mb-8">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+              <Link href="/marketing">
+                <div className="card-modern p-5 hover:shadow-lg transition-all cursor-pointer group">
+                  <div className="flex flex-col items-center text-center gap-3">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <TrendingUp className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-gray-900 dark:text-white">Marketing</h3>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Backlinks & Competitors</p>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+
+              <Link href="/crawler">
+                <div className="card-modern p-5 hover:shadow-lg transition-all cursor-pointer group">
+                  <div className="flex flex-col items-center text-center gap-3">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <Network className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-gray-900 dark:text-white">Site Crawler</h3>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Full Site Analysis</p>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+
+              <Link href="/analytics">
+                <div className="card-modern p-5 hover:shadow-lg transition-all cursor-pointer group">
+                  <div className="flex flex-col items-center text-center gap-3">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <BarChart3 className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-gray-900 dark:text-white">Analytics</h3>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Performance Insights</p>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+
+              <Link href="/graph">
+                <div className="card-modern p-5 hover:shadow-lg transition-all cursor-pointer group">
+                  <div className="flex flex-col items-center text-center gap-3">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <Network className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-gray-900 dark:text-white">Graph View</h3>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Visual Relationships</p>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+
+              <Link href="/report">
+                <div className="card-modern p-5 hover:shadow-lg transition-all cursor-pointer group">
+                  <div className="flex flex-col items-center text-center gap-3">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <FileText className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-gray-900 dark:text-white">Full Report</h3>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">PDF Export</p>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            </div>
+          </div>
+        )}
 
         {/* Loading State */}
         {isScanning && (
