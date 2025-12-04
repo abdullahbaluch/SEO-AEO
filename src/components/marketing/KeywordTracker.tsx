@@ -25,9 +25,21 @@ import {
   ResponsiveContainer
 } from 'recharts';
 
+interface KeywordRank {
+  id: string;
+  keyword: string;
+  domain?: string;
+  position: number;
+  previous_position: number;
+  search_volume: number;
+  difficulty: number;
+  url: string;
+  history: string;
+}
+
 export default function KeywordTracker({ domain }: { domain?: string }) {
   const [newKeyword, setNewKeyword] = useState('');
-  const [selectedKeyword, setSelectedKeyword] = useState(null);
+  const [selectedKeyword, setSelectedKeyword] = useState<KeywordRank | null>(null);
   const queryClient = useQueryClient();
 
   const { data: keywords = [], isLoading } = useQuery({
@@ -37,12 +49,12 @@ export default function KeywordTracker({ domain }: { domain?: string }) {
   });
 
   const addKeywordMutation = useMutation({
-    mutationFn: async (keyword) => {
+    mutationFn: async (keyword: string) => {
       // Simulate SERP check - in production, use a SERP API
       const position = Math.floor(Math.random() * 50) + 1;
       const volume = Math.floor(Math.random() * 10000) + 100;
       const difficulty = Math.floor(Math.random() * 100);
-      
+
       return base44.entities.KeywordRank.create({
         keyword,
         domain,
@@ -61,16 +73,16 @@ export default function KeywordTracker({ domain }: { domain?: string }) {
   });
 
   const deleteKeywordMutation = useMutation({
-    mutationFn: (id) => base44.entities.KeywordRank.delete(id),
+    mutationFn: (id: string) => base44.entities.KeywordRank.delete(id),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['keywords', domain] }),
   });
 
   const refreshMutation = useMutation({
-    mutationFn: async (kw) => {
+    mutationFn: async (kw: KeywordRank) => {
       const newPosition = Math.max(1, kw.position + Math.floor(Math.random() * 11) - 5);
       const history = JSON.parse(kw.history || '[]');
       history.push({ date: new Date().toISOString().split('T')[0], position: newPosition });
-      
+
       return base44.entities.KeywordRank.update(kw.id, {
         previous_position: kw.position,
         position: newPosition,
@@ -80,21 +92,21 @@ export default function KeywordTracker({ domain }: { domain?: string }) {
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['keywords', domain] }),
   });
 
-  const handleAddKeyword = (e) => {
+  const handleAddKeyword = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (newKeyword.trim()) {
       addKeywordMutation.mutate(newKeyword.trim());
     }
   };
 
-  const getPositionChange = (kw) => {
+  const getPositionChange = (kw: KeywordRank) => {
     const change = (kw.previous_position || kw.position) - kw.position;
     if (change > 0) return { icon: TrendingUp, color: 'text-emerald-500', value: `+${change}` };
     if (change < 0) return { icon: TrendingDown, color: 'text-red-500', value: change };
     return { icon: Minus, color: 'text-gray-400', value: '0' };
   };
 
-  const getDifficultyColor = (diff) => {
+  const getDifficultyColor = (diff: number) => {
     if (diff < 30) return 'bg-emerald-100 text-emerald-700';
     if (diff < 60) return 'bg-amber-100 text-amber-700';
     return 'bg-red-100 text-red-700';
