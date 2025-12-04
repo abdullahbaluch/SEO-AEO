@@ -1,5 +1,0 @@
-# This file remaps author names and emails for display purposes
-# Format: Proper Name <proper@email.com> <commit@email.com>
-
-# Remap qwencode commits to LineLogic
-LineLogic <115076851+abdullahbaluch@users.noreply.github.com> qwencode <qwen.code@proton.me>
