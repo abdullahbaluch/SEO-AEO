@@ -202,8 +202,8 @@ export default function Dashboard() {
       <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
 
         {/* URL Search Bar - Main Entry Point */}
-        <div className="mb-8">
-          <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-6 shadow-sm">
+        <div className="mb-6">
+          <div className="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800 p-6" style={{ boxShadow: 'var(--shadow-sm)' }}>
             <div className="max-w-4xl mx-auto">
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 text-center">
                 Comprehensive SEO Analysis
@@ -228,7 +228,7 @@ export default function Dashboard() {
                     type="url"
                     name="url"
                     placeholder="Enter URL to analyze (e.g., https://example.com)"
-                    className="w-full bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl pl-12 pr-4 py-4 text-gray-900 dark:text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                    className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg pl-12 pr-4 py-3 text-gray-900 dark:text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[rgb(70,95,255)] focus:border-transparent transition-colors"
                     required
                     disabled={isScanning}
                   />
@@ -236,7 +236,7 @@ export default function Dashboard() {
                 <button
                   type="submit"
                   disabled={isScanning}
-                  className="flex-shrink-0 inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold rounded-xl hover:from-indigo-600 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm hover:shadow-md"
+                  className="flex-shrink-0 inline-flex items-center gap-2 px-6 py-3 bg-[rgb(70,95,255)] text-white font-medium rounded-lg hover:bg-[rgb(60,85,245)] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                 >
                   {isScanning ? (
                     <>
@@ -258,72 +258,72 @@ export default function Dashboard() {
         {/* Quick Access Tools */}
         {!currentScan && !isScanning && (
           <div className="mb-8">
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
               <Link href="/marketing">
-                <div className="card-modern p-5 hover:shadow-lg transition-all cursor-pointer group">
-                  <div className="flex flex-col items-center text-center gap-3">
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <TrendingUp className="w-6 h-6 text-white" />
+                <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors cursor-pointer">
+                  <div className="flex flex-col items-center text-center gap-2">
+                    <div className="w-10 h-10 rounded-lg bg-[rgb(70,95,255)] flex items-center justify-center">
+                      <TrendingUp className="w-5 h-5 text-white" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900 dark:text-white">Marketing</h3>
-                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Backlinks & Competitors</p>
+                      <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Marketing</h3>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Backlinks</p>
                     </div>
                   </div>
                 </div>
               </Link>
 
               <Link href="/crawler">
-                <div className="card-modern p-5 hover:shadow-lg transition-all cursor-pointer group">
-                  <div className="flex flex-col items-center text-center gap-3">
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <Network className="w-6 h-6 text-white" />
+                <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors cursor-pointer">
+                  <div className="flex flex-col items-center text-center gap-2">
+                    <div className="w-10 h-10 rounded-lg bg-[rgb(70,95,255)] flex items-center justify-center">
+                      <Network className="w-5 h-5 text-white" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900 dark:text-white">Site Crawler</h3>
-                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Full Site Analysis</p>
+                      <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Crawler</h3>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Site Audit</p>
                     </div>
                   </div>
                 </div>
               </Link>
 
               <Link href="/analytics">
-                <div className="card-modern p-5 hover:shadow-lg transition-all cursor-pointer group">
-                  <div className="flex flex-col items-center text-center gap-3">
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <BarChart3 className="w-6 h-6 text-white" />
+                <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors cursor-pointer">
+                  <div className="flex flex-col items-center text-center gap-2">
+                    <div className="w-10 h-10 rounded-lg bg-[rgb(70,95,255)] flex items-center justify-center">
+                      <BarChart3 className="w-5 h-5 text-white" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900 dark:text-white">Analytics</h3>
-                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Performance Insights</p>
+                      <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Analytics</h3>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Insights</p>
                     </div>
                   </div>
                 </div>
               </Link>
 
               <Link href="/graph">
-                <div className="card-modern p-5 hover:shadow-lg transition-all cursor-pointer group">
-                  <div className="flex flex-col items-center text-center gap-3">
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <Network className="w-6 h-6 text-white" />
+                <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors cursor-pointer">
+                  <div className="flex flex-col items-center text-center gap-2">
+                    <div className="w-10 h-10 rounded-lg bg-[rgb(70,95,255)] flex items-center justify-center">
+                      <Network className="w-5 h-5 text-white" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900 dark:text-white">Graph View</h3>
-                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Visual Relationships</p>
+                      <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Graph</h3>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Relationships</p>
                     </div>
                   </div>
                 </div>
               </Link>
 
               <Link href="/report">
-                <div className="card-modern p-5 hover:shadow-lg transition-all cursor-pointer group">
-                  <div className="flex flex-col items-center text-center gap-3">
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <FileText className="w-6 h-6 text-white" />
+                <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors cursor-pointer">
+                  <div className="flex flex-col items-center text-center gap-2">
+                    <div className="w-10 h-10 rounded-lg bg-[rgb(70,95,255)] flex items-center justify-center">
+                      <FileText className="w-5 h-5 text-white" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900 dark:text-white">Full Report</h3>
-                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">PDF Export</p>
+                      <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Report</h3>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Export</p>
                     </div>
                   </div>
                 </div>
@@ -362,7 +362,7 @@ export default function Dashboard() {
               <p className="text-lg text-gray-500 dark:text-gray-400 mb-8">
                 Enter any URL in the search bar above to generate a complete SEO audit report
               </p>
-              <div className="bg-white dark:bg-gray-900 rounded-2xl border-2 border-dashed border-gray-200 dark:border-gray-800 p-8">
+              <div className="bg-white dark:bg-gray-900 rounded-lg border-2 border-dashed border-gray-200 dark:border-gray-800 p-6">
                 <ScanHistory
                   scans={scans}
                   onSelect={handleSelectScan}
@@ -383,7 +383,7 @@ export default function Dashboard() {
             className="space-y-6"
           >
             {/* Health Score Header */}
-            <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-8 shadow-sm">
+            <div className="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800 p-6" style={{ boxShadow: 'var(--shadow-sm)' }}>
               <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
                 <div className="flex items-center gap-6">
                   <div className="flex-shrink-0">
@@ -397,7 +397,7 @@ export default function Dashboard() {
                       {currentScan.url}
                     </p>
                     <div className="flex flex-wrap items-center gap-3">
-                      <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold ${
+                      <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium ${
                         summary?.status === 'good' ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400' :
                         summary?.status === 'warning' ? 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400' :
                         'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400'
@@ -424,11 +424,11 @@ export default function Dashboard() {
             </div>
 
             {/* Key Metrics Summary */}
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
               <div className="stats-card">
                 <div className="flex items-center justify-between mb-2">
                   <FileText className="w-5 h-5 text-gray-400" />
-                  <span className={`text-2xl font-bold ${
+                  <span className={`text-xl font-bold ${
                     (currentScan.scores?.metadata || 0) >= 80 ? 'text-emerald-600' :
                     (currentScan.scores?.metadata || 0) >= 60 ? 'text-amber-600' : 'text-red-600'
                   }`}>
@@ -440,7 +440,7 @@ export default function Dashboard() {
               <div className="stats-card">
                 <div className="flex items-center justify-between mb-2">
                   <Code className="w-5 h-5 text-gray-400" />
-                  <span className={`text-2xl font-bold ${
+                  <span className={`text-xl font-bold ${
                     (currentScan.scores?.schema || 0) >= 80 ? 'text-emerald-600' :
                     (currentScan.scores?.schema || 0) >= 60 ? 'text-amber-600' : 'text-red-600'
                   }`}>
@@ -452,7 +452,7 @@ export default function Dashboard() {
               <div className="stats-card">
                 <div className="flex items-center justify-between mb-2">
                   <Type className="w-5 h-5 text-gray-400" />
-                  <span className={`text-2xl font-bold ${
+                  <span className={`text-xl font-bold ${
                     (currentScan.scores?.content || 0) >= 80 ? 'text-emerald-600' :
                     (currentScan.scores?.content || 0) >= 60 ? 'text-amber-600' : 'text-red-600'
                   }`}>
@@ -464,7 +464,7 @@ export default function Dashboard() {
               <div className="stats-card">
                 <div className="flex items-center justify-between mb-2">
                   <Link2 className="w-5 h-5 text-gray-400" />
-                  <span className={`text-2xl font-bold ${
+                  <span className={`text-xl font-bold ${
                     (currentScan.scores?.links || 0) >= 80 ? 'text-emerald-600' :
                     (currentScan.scores?.links || 0) >= 60 ? 'text-amber-600' : 'text-red-600'
                   }`}>
@@ -476,7 +476,7 @@ export default function Dashboard() {
               <div className="stats-card">
                 <div className="flex items-center justify-between mb-2">
                   <Image className="w-5 h-5 text-gray-400" />
-                  <span className={`text-2xl font-bold ${
+                  <span className={`text-xl font-bold ${
                     (currentScan.scores?.images || 0) >= 80 ? 'text-emerald-600' :
                     (currentScan.scores?.images || 0) >= 60 ? 'text-amber-600' : 'text-red-600'
                   }`}>
@@ -488,7 +488,7 @@ export default function Dashboard() {
               <div className="stats-card">
                 <div className="flex items-center justify-between mb-2">
                   <Zap className="w-5 h-5 text-gray-400" />
-                  <span className={`text-2xl font-bold ${
+                  <span className={`text-xl font-bold ${
                     (currentScan.scores?.performance || 0) >= 80 ? 'text-emerald-600' :
                     (currentScan.scores?.performance || 0) >= 60 ? 'text-amber-600' : 'text-red-600'
                   }`}>
@@ -500,8 +500,8 @@ export default function Dashboard() {
             </div>
 
             {/* Issues Summary - Semrush Style Color-Coded */}
-            <div className="grid md:grid-cols-3 gap-4">
-              <div className="card-modern p-6">
+            <div className="grid md:grid-cols-3 gap-3">
+              <div className="card-modern p-5" style={{ boxShadow: 'var(--shadow-sm)' }}>
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-lg bg-red-100 dark:bg-red-900/20 flex items-center justify-center">
@@ -515,7 +515,7 @@ export default function Dashboard() {
                 </div>
                 <p className="text-xs text-gray-500 dark:text-gray-400">Critical issues that need immediate attention</p>
               </div>
-              <div className="card-modern p-6">
+              <div className="card-modern p-5" style={{ boxShadow: 'var(--shadow-sm)' }}>
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-lg bg-amber-100 dark:bg-amber-900/20 flex items-center justify-center">
@@ -529,7 +529,7 @@ export default function Dashboard() {
                 </div>
                 <p className="text-xs text-gray-500 dark:text-gray-400">Issues that should be fixed soon</p>
               </div>
-              <div className="card-modern p-6">
+              <div className="card-modern p-5" style={{ boxShadow: 'var(--shadow-sm)' }}>
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/20 flex items-center justify-center">
@@ -548,7 +548,7 @@ export default function Dashboard() {
             {/* All Analysis Sections - Comprehensive View */}
             {/* Errors - Red Priority */}
             {categorizedIssues.errors.length > 0 && (
-              <div className="card-modern p-6">
+              <div className="card-modern p-5" style={{ boxShadow: 'var(--shadow-sm)' }}>
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-10 h-10 rounded-lg bg-red-100 dark:bg-red-900/20 flex items-center justify-center">
                     <Shield className="w-5 h-5 text-red-600 dark:text-red-400" />
@@ -570,7 +570,7 @@ export default function Dashboard() {
 
             {/* Warnings - Yellow Priority */}
             {categorizedIssues.warnings.length > 0 && (
-              <div className="card-modern p-6">
+              <div className="card-modern p-5" style={{ boxShadow: 'var(--shadow-sm)' }}>
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-10 h-10 rounded-lg bg-amber-100 dark:bg-amber-900/20 flex items-center justify-center">
                     <Shield className="w-5 h-5 text-amber-600 dark:text-amber-400" />
@@ -592,7 +592,7 @@ export default function Dashboard() {
 
             {/* Notices - Blue Priority */}
             {categorizedIssues.notices.length > 0 && (
-              <div className="card-modern p-6">
+              <div className="card-modern p-5" style={{ boxShadow: 'var(--shadow-sm)' }}>
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/20 flex items-center justify-center">
                     <Shield className="w-5 h-5 text-blue-600 dark:text-blue-400" />
@@ -613,21 +613,21 @@ export default function Dashboard() {
             )}
 
             {/* Charts Overview */}
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="card-modern p-6">
+            <div className="grid md:grid-cols-2 gap-3">
+              <div className="card-modern p-5" style={{ boxShadow: 'var(--shadow-sm)' }}>
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Score Breakdown</h3>
                 <ScoreRadarChart scores={currentScan.scores || {}} />
               </div>
-              <div className="card-modern p-6">
+              <div className="card-modern p-5" style={{ boxShadow: 'var(--shadow-sm)' }}>
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Issues Distribution</h3>
                 <IssuePieChart issues={currentScan.issues || []} />
               </div>
             </div>
 
             {/* Metadata Analysis */}
-            <div className="card-modern p-6">
-              <div className="flex items-center gap-3 mb-6">
-                <FileText className="w-6 h-6 text-indigo-600" />
+            <div className="card-modern p-5" style={{ boxShadow: 'var(--shadow-sm)' }}>
+              <div className="flex items-center gap-3 mb-5">
+                <FileText className="w-6 h-6 text-[rgb(70,95,255)]" />
                 <h2 className="text-xl font-bold text-gray-900 dark:text-white">Metadata Analysis</h2>
               </div>
               <MetadataViewer
@@ -639,9 +639,9 @@ export default function Dashboard() {
             </div>
 
             {/* Schema Markup */}
-            <div className="card-modern p-6">
-              <div className="flex items-center gap-3 mb-6">
-                <Code className="w-6 h-6 text-indigo-600" />
+            <div className="card-modern p-5" style={{ boxShadow: 'var(--shadow-sm)' }}>
+              <div className="flex items-center gap-3 mb-5">
+                <Code className="w-6 h-6 text-[rgb(70,95,255)]" />
                 <h2 className="text-xl font-bold text-gray-900 dark:text-white">Schema Markup</h2>
               </div>
               <SchemaViewer
@@ -653,14 +653,14 @@ export default function Dashboard() {
             </div>
 
             {/* Content Analysis */}
-            <div className="card-modern p-6">
-              <div className="flex items-center gap-3 mb-6">
-                <Type className="w-6 h-6 text-indigo-600" />
+            <div className="card-modern p-5" style={{ boxShadow: 'var(--shadow-sm)' }}>
+              <div className="flex items-center gap-3 mb-5">
+                <Type className="w-6 h-6 text-[rgb(70,95,255)]" />
                 <h2 className="text-xl font-bold text-gray-900 dark:text-white">Content Analysis</h2>
               </div>
               <div className="space-y-6">
                 <ContentMetrics metrics={currentScan.contentMetrics} />
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid md:grid-cols-2 gap-3">
                   <HeadingTree headings={currentScan.headings} />
                   <KeywordChart keywords={currentScan.keywords} />
                 </div>
@@ -668,18 +668,18 @@ export default function Dashboard() {
             </div>
 
             {/* Links Analysis */}
-            <div className="card-modern p-6">
-              <div className="flex items-center gap-3 mb-6">
-                <Link2 className="w-6 h-6 text-indigo-600" />
+            <div className="card-modern p-5" style={{ boxShadow: 'var(--shadow-sm)' }}>
+              <div className="flex items-center gap-3 mb-5">
+                <Link2 className="w-6 h-6 text-[rgb(70,95,255)]" />
                 <h2 className="text-xl font-bold text-gray-900 dark:text-white">Links Analysis</h2>
               </div>
               <LinkAnalysis links={currentScan.links} />
             </div>
 
             {/* Images Analysis */}
-            <div className="card-modern p-6">
-              <div className="flex items-center gap-3 mb-6">
-                <Image className="w-6 h-6 text-indigo-600" />
+            <div className="card-modern p-5" style={{ boxShadow: 'var(--shadow-sm)' }}>
+              <div className="flex items-center gap-3 mb-5">
+                <Image className="w-6 h-6 text-[rgb(70,95,255)]" />
                 <h2 className="text-xl font-bold text-gray-900 dark:text-white">Images Analysis</h2>
               </div>
               <ImageAnalysis images={currentScan.images} />
