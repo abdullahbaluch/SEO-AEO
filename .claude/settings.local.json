@@ -13,7 +13,8 @@
       "Bash(npm run dev:*)",
       "Bash(git add:*)",
       "Bash(git commit -m \"$(cat <<''EOF''\nConsolidate SEO analyzers to use single engine for consistent results\n\n- Replace /report page API endpoint with direct SEOAnalyzer usage\n- Remove duplicate analysis logic from /api/full-report\n- Update report page to use same UI components as homepage\n- Add export functionality (JSON & HTML) to both pages\n- Ensure identical SEO scores and analysis across all pages\n\nThis change eliminates inconsistent results between the homepage\nand report page by using a single source of truth for SEO analysis.\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(git commit:*)"
     ],
     "deny": [],
     "ask": []

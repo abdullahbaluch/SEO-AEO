@@ -24,12 +24,6 @@ A comprehensive SEO (Search Engine Optimization) and AEO (Answer Engine Optimiza
 - **Competitor analysis** (traffic, keywords, backlinks)
 - **Content optimizer** with readability scoring
 
-### 👥 Team Management
-- Team member profiles with skill tracking
-- Workload and availability management
-- **AI-powered task allocation** using LLM
-- Task management with Kanban workflow
-
 ### 📊 Data Visualization
 - Network graphs of SEO relationships
 - Historical trend charts
@@ -59,10 +53,7 @@ SEO/
 │   │   ├── crawler/             # Crawler route
 │   │   ├── marketing/           # Marketing tools route
 │   │   ├── graph/               # Graph visualization route
-│   │   ├── analytics/           # Analytics route
-│   │   ├── team/                # Team management route
-│   │   ├── tasks/               # Task management route
-│   │   └── ai-allocation/       # AI task allocation route
+│   │   └── analytics/           # Analytics route
 │   │
 │   ├── components/              # React components
 │   │   ├── Layout.tsx           # App layout wrapper
@@ -79,13 +70,6 @@ SEO/
 │   │   │   ├── BacklinkMonitor.tsx
 │   │   │   ├── ContentOptimizer.tsx
 │   │   │   └── CompetitorAnalysis.tsx
-│   │   ├── Team/                # Team management components
-│   │   │   ├── MemberCard.tsx
-│   │   │   ├── AddMemberForm.tsx
-│   │   │   ├── EditMemberForm.tsx
-│   │   │   └── SkillRadarChart.tsx
-│   │   ├── tasks/               # Task components
-│   │   │   └── EditTaskForm.tsx
 │   │   └── ui/                  # Reusable UI components
 │   │
 │   ├── types/                   # TypeScript type definitions
@@ -183,9 +167,6 @@ This project uses Base44 for entity management with JSON schemas. Configure your
 - `/marketing` - Marketing Tools
 - `/graph` - Graph Visualization
 - `/analytics` - Analytics & Trends
-- `/team` - Team Management
-- `/tasks` - Task Management
-- `/ai-allocation` - AI Task Allocation
 
 ## Development Notes
 
@@ -234,7 +215,3 @@ Private project - all rights reserved.
 ## Support
 
 For questions or issues, please refer to the project documentation or contact the development team.
-
----
-
-**Note:** This project was converted from `.txt` files to proper TypeScript/React format for use with Next.js, React, and Tailwind CSS. Some imports and dependencies may need adjustment based on your specific setup.
