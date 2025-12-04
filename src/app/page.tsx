@@ -44,6 +44,7 @@ import { ScoreRadarChart, IssuePieChart, CategoryBarChart, KeywordChart, Content
 import { SEOAnalyzer } from '@/components/seo/SEOAnalyzer';
 import { ReportGenerator } from '@/components/seo/ReportGenerator';
 import { GraphEngine } from '@/components/seo/GraphEngine';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 export default function Dashboard() {
   const [currentScan, setCurrentScan] = useState<any>(null);
@@ -57,6 +58,9 @@ export default function Dashboard() {
     queryKey: ['scans'],
     queryFn: () => base44.entities.Scan.list('-created_date', 50),
   });
+
+  // Get historical data for current URL
+  const urlHistory = currentScan ? scans.filter((s: any) => s.url === currentScan.url).slice(0, 10).reverse() : [];
 
   // Create scan mutation
   const createScanMutation = useMutation({
@@ -116,6 +120,7 @@ export default function Dashboard() {
         status: 'completed',
         seo_score: scores?.seo || 0,
         aeo_score: scores?.aeo || 0,
+        overall_score: scores?.overall || 0,
         metadata_score: scores?.metadata || 0,
         schema_score: scores?.schema || 0,
         content_score: scores?.content || 0,
@@ -255,10 +260,11 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Quick Access Tools */}
-        {!currentScan && !isScanning && (
-          <div className="mb-8">
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+        {/* Quick Access Tools - Always Visible */}
+        <div className="mb-6">
+          <div className="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800 p-4">
+            <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Quick Access</h3>
+            <div className="grid grid-cols-2 gap-3">
               <Link href="/marketing">
                 <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors cursor-pointer">
                   <div className="flex flex-col items-center text-center gap-2">
@@ -286,51 +292,9 @@ export default function Dashboard() {
                   </div>
                 </div>
               </Link>
-
-              <Link href="/analytics">
-                <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors cursor-pointer">
-                  <div className="flex flex-col items-center text-center gap-2">
-                    <div className="w-10 h-10 rounded-lg bg-[rgb(70,95,255)] flex items-center justify-center">
-                      <BarChart3 className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Analytics</h3>
-                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Insights</p>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-
-              <Link href="/graph">
-                <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors cursor-pointer">
-                  <div className="flex flex-col items-center text-center gap-2">
-                    <div className="w-10 h-10 rounded-lg bg-[rgb(70,95,255)] flex items-center justify-center">
-                      <Network className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Graph</h3>
-                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Relationships</p>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-
-              <Link href="/report">
-                <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors cursor-pointer">
-                  <div className="flex flex-col items-center text-center gap-2">
-                    <div className="w-10 h-10 rounded-lg bg-[rgb(70,95,255)] flex items-center justify-center">
-                      <FileText className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Report</h3>
-                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Export</p>
-                    </div>
-                  </div>
-                </div>
-              </Link>
             </div>
           </div>
-        )}
+        </div>
 
         {/* Loading State */}
         {isScanning && (
@@ -411,6 +375,17 @@ export default function Dashboard() {
                   </div>
                 </div>
                 <div className="flex items-center gap-3 flex-shrink-0">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => {
+                      setCurrentScan(null);
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
+                  >
+                    <Search className="w-4 h-4 mr-2" />
+                    New Scan
+                  </Button>
                   <Button variant="outline" size="sm" onClick={handleExportJSON}>
                     <Download className="w-4 h-4 mr-2" />
                     Export JSON
@@ -544,6 +519,59 @@ export default function Dashboard() {
                 <p className="text-xs text-gray-500 dark:text-gray-400">Recommendations for optimization</p>
               </div>
             </div>
+
+            {/* Historical Trends - Show if there's history for this URL */}
+            {urlHistory.length > 1 && (
+              <div className="card-modern p-5" style={{ boxShadow: 'var(--shadow-sm)' }}>
+                <div className="flex items-center gap-3 mb-5">
+                  <TrendingUp className="w-6 h-6 text-[rgb(70,95,255)]" />
+                  <div>
+                    <h2 className="text-xl font-bold text-gray-900 dark:text-white">Historical Trends</h2>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      Score progression for this URL ({urlHistory.length} scans)
+                    </p>
+                  </div>
+                </div>
+                <ResponsiveContainer width="100%" height={300}>
+                  <AreaChart data={urlHistory.map((scan: any) => ({
+                    date: new Date(scan.created_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+                    seo: scan.seo_score || 0,
+                    aeo: scan.aeo_score || 0,
+                    overall: scan.overall_score || 0,
+                  }))}>
+                    <defs>
+                      <linearGradient id="colorSeo" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#6366f1" stopOpacity={0.3}/>
+                        <stop offset="95%" stopColor="#6366f1" stopOpacity={0}/>
+                      </linearGradient>
+                      <linearGradient id="colorAeo" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#ec4899" stopOpacity={0.3}/>
+                        <stop offset="95%" stopColor="#ec4899" stopOpacity={0}/>
+                      </linearGradient>
+                      <linearGradient id="colorOverall" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#10b981" stopOpacity={0.4}/>
+                        <stop offset="95%" stopColor="#10b981" stopOpacity={0}/>
+                      </linearGradient>
+                    </defs>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                    <XAxis dataKey="date" stroke="#6b7280" style={{ fontSize: '12px' }} />
+                    <YAxis stroke="#6b7280" style={{ fontSize: '12px' }} domain={[0, 100]} />
+                    <Tooltip
+                      contentStyle={{
+                        backgroundColor: 'white',
+                        border: '1px solid #e5e7eb',
+                        borderRadius: '8px',
+                        padding: '12px',
+                      }}
+                    />
+                    <Legend wrapperStyle={{ paddingTop: '20px' }} />
+                    <Area type="monotone" dataKey="overall" stroke="#10b981" strokeWidth={2.5} fill="url(#colorOverall)" name="Overall Score" />
+                    <Area type="monotone" dataKey="seo" stroke="#6366f1" strokeWidth={2} fill="url(#colorSeo)" name="SEO Score" />
+                    <Area type="monotone" dataKey="aeo" stroke="#ec4899" strokeWidth={2} fill="url(#colorAeo)" name="AEO Score" />
+                  </AreaChart>
+                </ResponsiveContainer>
+              </div>
+            )}
 
             {/* All Analysis Sections - Comprehensive View */}
             {/* Errors - Red Priority */}
