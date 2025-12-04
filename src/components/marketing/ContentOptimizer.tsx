@@ -17,10 +17,22 @@ import {
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
+interface ContentAnalysis {
+  score: number;
+  wordCount: number;
+  sentenceCount: number;
+  avgWordsPerSentence: string;
+  keywordDensity: string;
+  keywordCount: number;
+  readingEase: string;
+  suggestions: Array<{ type: string; text: string }>;
+  semanticKeywords: string[];
+}
+
 export default function ContentOptimizer({ domain }: { domain?: string }) {
   const [content, setContent] = useState('');
   const [targetKeyword, setTargetKeyword] = useState('');
-  const [analysis, setAnalysis] = useState(null);
+  const [analysis, setAnalysis] = useState<ContentAnalysis | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
 
   const analyzeContent = async () => {
@@ -135,26 +147,27 @@ export default function ContentOptimizer({ domain }: { domain?: string }) {
     }
   };
 
-  const countSyllables = (word) => {
-    word = word.toLowerCase();
-    if (word.length <= 3) return 1;
-    word = word.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, '');
-    word = word.replace(/^y/, '');
-    const matches = word.match(/[aeiouy]{1,2}/g);
+  const countSyllables = (word: string) => {
+    let processedWord = word.toLowerCase();
+    if (processedWord.length <= 3) return 1;
+    processedWord = processedWord.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, '');
+    processedWord = processedWord.replace(/^y/, '');
+    const matches = processedWord.match(/[aeiouy]{1,2}/g);
     return matches ? matches.length : 1;
   };
 
-  const getScoreColor = (score) => {
+  const getScoreColor = (score: number) => {
     if (score >= 80) return 'text-emerald-600';
     if (score >= 60) return 'text-amber-600';
     return 'text-red-600';
   };
 
-  const getReadabilityLabel = (score) => {
-    if (score >= 80) return 'Very Easy';
-    if (score >= 60) return 'Easy';
-    if (score >= 40) return 'Moderate';
-    if (score >= 20) return 'Difficult';
+  const getReadabilityLabel = (score: number | string) => {
+    const numScore = typeof score === 'string' ? parseFloat(score) : score;
+    if (numScore >= 80) return 'Very Easy';
+    if (numScore >= 60) return 'Easy';
+    if (numScore >= 40) return 'Moderate';
+    if (numScore >= 20) return 'Difficult';
     return 'Very Difficult';
   };
 

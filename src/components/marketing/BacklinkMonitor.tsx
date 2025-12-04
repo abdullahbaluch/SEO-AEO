@@ -64,12 +64,12 @@ export default function BacklinkMonitor({ domain }: { domain?: string }) {
   });
 
   const deleteBacklinkMutation = useMutation({
-    mutationFn: (id) => base44.entities.Backlink.delete(id),
+    mutationFn: (id: string) => base44.entities.Backlink.delete(id),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['backlinks', domain] }),
   });
 
   // Filter backlinks
-  const filteredBacklinks = backlinks.filter(bl => {
+  const filteredBacklinks = backlinks.filter((bl: any) => {
     if (filter === 'all') return true;
     if (filter === 'new') return bl.status === 'new';
     if (filter === 'lost') return bl.status === 'lost';
@@ -81,10 +81,10 @@ export default function BacklinkMonitor({ domain }: { domain?: string }) {
   // Stats
   const stats = {
     total: backlinks.length,
-    new: backlinks.filter(b => b.status === 'new').length,
-    lost: backlinks.filter(b => b.status === 'lost').length,
-    dofollow: backlinks.filter(b => b.link_type === 'dofollow').length,
-    avgDA: backlinks.length ? Math.round(backlinks.reduce((s, b) => s + (b.domain_authority || 0), 0) / backlinks.length) : 0,
+    new: backlinks.filter((b: any) => b.status === 'new').length,
+    lost: backlinks.filter((b: any) => b.status === 'lost').length,
+    dofollow: backlinks.filter((b: any) => b.link_type === 'dofollow').length,
+    avgDA: backlinks.length ? Math.round(backlinks.reduce((s: number, b: any) => s + (b.domain_authority || 0), 0) / backlinks.length) : 0,
   };
 
   // Chart data
@@ -94,14 +94,14 @@ export default function BacklinkMonitor({ domain }: { domain?: string }) {
   ];
 
   const daDistribution = [
-    { range: '0-20', count: backlinks.filter(b => b.domain_authority < 20).length },
-    { range: '20-40', count: backlinks.filter(b => b.domain_authority >= 20 && b.domain_authority < 40).length },
-    { range: '40-60', count: backlinks.filter(b => b.domain_authority >= 40 && b.domain_authority < 60).length },
-    { range: '60-80', count: backlinks.filter(b => b.domain_authority >= 60 && b.domain_authority < 80).length },
-    { range: '80+', count: backlinks.filter(b => b.domain_authority >= 80).length },
+    { range: '0-20', count: backlinks.filter((b: any) => b.domain_authority < 20).length },
+    { range: '20-40', count: backlinks.filter((b: any) => b.domain_authority >= 20 && b.domain_authority < 40).length },
+    { range: '40-60', count: backlinks.filter((b: any) => b.domain_authority >= 40 && b.domain_authority < 60).length },
+    { range: '60-80', count: backlinks.filter((b: any) => b.domain_authority >= 60 && b.domain_authority < 80).length },
+    { range: '80+', count: backlinks.filter((b: any) => b.domain_authority >= 80).length },
   ];
 
-  const getStatusBadge = (status) => {
+  const getStatusBadge = (status: string) => {
     switch (status) {
       case 'new': return 'bg-emerald-100 text-emerald-700';
       case 'lost': return 'bg-red-100 text-red-700';
@@ -109,7 +109,7 @@ export default function BacklinkMonitor({ domain }: { domain?: string }) {
     }
   };
 
-  const getLinkTypeBadge = (type) => {
+  const getLinkTypeBadge = (type: string) => {
     switch (type) {
       case 'dofollow': return 'bg-indigo-100 text-indigo-700';
       case 'nofollow': return 'bg-gray-100 text-gray-600';
